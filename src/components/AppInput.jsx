@@ -1,19 +1,29 @@
 import React from "react";
 
-export const AppInput = ({inputLabel, inputPlaceholder}) => {
-    return (
-        <label className="input-wrapper" htmlFor="username">
-              {inputLabel}
-              <input
-                required  
-                type="text" 
-                name="username"
-                id="username"
-                placeholder={inputPlaceholder}
-              />
-              <span id="error-message">
-                Введите номер в правильном формате например
-              </span>
-        </label> 
-    );  
+export const AppInput = ({
+  inputLabel,
+  inputPlaceholder,
+  isRequired,
+  inputType,
+  id,
+  errorText, 
+  inputValue,
+  inputChange,
+  hasError, 
+}) => {
+  return (
+    <label className={`input-wrapper ${hasError && "_error"} ` } htmlFor={id}>
+      {inputLabel}
+      <input 
+        required={isRequired}
+        type={inputType}
+        name={id}
+        id={id}
+        placeholder={inputPlaceholder}
+        value={inputValue} 
+        onChange={(e)=>inputChange(e.target.value)}
+      />
+  {hasError && <span id="error-message">{errorText}</span>}
+    </label>
+  );
 };
